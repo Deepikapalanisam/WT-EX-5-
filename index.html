@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BILL-CALCULATOR</title>
+    <style>
+         body {
+            background-image: url("bg.jpeg"); 
+            background-repeat: no-repeat;
+            background-size: cover; 
+        }
+    </style>
+</head>
+<body>
+    
+    <h1 id="title" style="color: rgb(40, 108, 108);"><center>RESTAURANT BILL CALCULATOR</center></h1>
+    
+    
+    <div id="leftContainer" style="float: left; width: 60%; height: 80%; background-color: aquamarine;">
+        <form id="orderForm">
+            <pre></pre>
+            Customer Name:         <input type="text" id="customerName" placeholder="Enter your name"></pre>
+            
+           
+            <h3>Food Items:</h3><pre>
+            Pizza - ₹15            <input type="number" id="pizzaQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Pasta - ₹10            <input type="number" id="pastaQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Biryani - ₹8           <input type="number" id="biryaniQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Tandoori Chicken - ₹20 <input type="number" id="tandooriQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Manchurian - ₹18       <input type="number" id="manchurianQuantity" value="0" min="0" oninput="calculateTotal()"><br></pre>
+            
+            <h3>Juice Items:</h3>
+            <pre>
+            Watermelon Juice - ₹15 <input type="number" id="watermelonQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Lemon Juice - ₹10      <input type="number" id="lemonQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Apple Juice - ₹8       <input type="number" id="appleQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Grapes Juice - ₹20     <input type="number" id="grapesQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Orange Juice - ₹18     <input type="number" id="orangeQuantity" value="0" min="0" oninput="calculateTotal()"><br></pre>
+            
+            <h3>Dessert Items:</h3><pre>
+            Ice Cream - ₹5         <input type="number" id="icecreamQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Cake - ₹12             <input type="number" id="cakeQuantity" value="0" min="0" oninput="calculateTotal()"><br>
+            Pudding - ₹8           <input type="number" id="puddingQuantity" value="0" min="0" oninput="calculateTotal()"><br></pre>
+            
+            <center><button type="button" id="calculateButton">Calculate Total</button></center>
+        </form>
+    </div>
+    
+    
+    <div id="rightContainer" style="float: right; width: 40%; height: 80%; background-color: rgb(149, 225, 200);">
+        <h3 id="customerNameDisplay"></h3>
+        <h3 id="orderSummaryTitle">Order Summary:</h3>
+        <ul id="orderSummary"></ul>
+        <h3>Total Amount: ₹<span id="totalAmount">0.00</span></h3>
+    </div>
+    
+   
+    <h3 id="thankYouMessage" style="color: rgb(40, 108, 108);"><center>THANK YOU</center></h3>
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calculateButton = document.getElementById('calculateButton');
+            calculateButton.addEventListener('click', calculateTotal);
+        });
+
+        function calculateTotal() {
+            var customerName = document.getElementById('customerName').value;
+            document.getElementById('customerNameDisplay').textContent = "Customer Name: " + customerName;
+
+            var foodPrices = {
+                "Pizza": 15,
+                "Pasta": 10,
+                "Biryani": 8,
+                "Tandoori Chicken": 20,
+                "Manchurian": 18,
+                "Watermelon Juice": 15,
+                "Lemon Juice": 10,
+                "Apple Juice": 8,
+                "Grapes Juice": 20,
+                "Orange Juice": 18,
+                "Ice Cream": 5,
+                "Cake": 12,
+                "Pudding": 8
+            };
+
+            var totalPrice = 0;
+            var orderSummary = ""; 
+            var pizzaQty = parseInt(document.getElementById('pizzaQuantity').value);
+            if (pizzaQty > 0) {
+                totalPrice += pizzaQty * foodPrices["Pizza"];
+                orderSummary += "Pizza - Quantity: " + pizzaQty + "<br>";
+            }
+            var pastaQty = parseInt(document.getElementById('pastaQuantity').value);
+            if (pastaQty > 0) {
+                totalPrice += pastaQty * foodPrices["Pasta"];
+                orderSummary += "Pasta - Quantity: " + pastaQty + "<br>";
+            }
+            var biryaniQty = parseInt(document.getElementById('biryaniQuantity').value);
+            if (biryaniQty > 0) {
+                totalPrice += biryaniQty * foodPrices["Biryani"];
+                orderSummary += "Biryani - Quantity: " + biryaniQty + "<br>";
+            }
+            var tandooriQty = parseInt(document.getElementById('tandooriQuantity').value);
+            if (tandooriQty > 0) {
+                totalPrice += tandooriQty * foodPrices["Tandoori Chicken"];
+                orderSummary += "Tandoori Chicken - Quantity: " + tandooriQty + "<br>";
+            }
+            var manchurianQty = parseInt(document.getElementById('manchurianQuantity').value);
+            if (manchurianQty > 0) {
+                totalPrice += manchurianQty * foodPrices["Manchurian"];
+                orderSummary += "Manchurian - Quantity: " + manchurianQty + "<br>";
+            }
+
+           
+            var watermelonQty = parseInt(document.getElementById('watermelonQuantity').value);
+            if (watermelonQty > 0) {
+                totalPrice += watermelonQty * foodPrices["Watermelon Juice"];
+                orderSummary += "Watermelon Juice - Quantity: " + watermelonQty + "<br>";
+            }
+            var lemonQty = parseInt(document.getElementById('lemonQuantity').value);
+            if (lemonQty > 0) {
+                totalPrice += lemonQty * foodPrices["Lemon Juice"];
+                orderSummary += "Lemon Juice - Quantity: " + lemonQty + "<br>";
+            }
+            var appleQty = parseInt(document.getElementById('appleQuantity').value);
+            if (appleQty > 0) {
+                totalPrice += appleQty * foodPrices["Apple Juice"];
+                orderSummary += "Apple Juice - Quantity: " + appleQty + "<br>";
+            }
+            var grapesQty = parseInt(document.getElementById('grapesQuantity').value);
+            if (grapesQty > 0) {
+                totalPrice += grapesQty * foodPrices["Grapes Juice"];
+                orderSummary += "Grapes Juice - Quantity: " + grapesQty + "<br>";
+            }
+            var orangeQty = parseInt(document.getElementById('orangeQuantity').value);
+            if (orangeQty > 0) {
+                totalPrice += orangeQty * foodPrices["Orange Juice"];
+                orderSummary += "Orange Juice - Quantity: " + orangeQty + "<br>";
+            }
+
+           
+            var icecreamQty = parseInt(document.getElementById('icecreamQuantity').value);
+            if (icecreamQty > 0) {
+                totalPrice += icecreamQty * foodPrices["Ice Cream"];
+                orderSummary += "Ice Cream - Quantity: " + icecreamQty + "<br>";
+            }
+            var cakeQty = parseInt(document.getElementById('cakeQuantity').value);
+            if (cakeQty > 0) {
+                totalPrice += cakeQty * foodPrices["Cake"];
+                orderSummary += "Cake - Quantity: " + cakeQty + "<br>";
+            }
+            var puddingQty = parseInt(document.getElementById('puddingQuantity').value);
+            if (puddingQty > 0) {
+                totalPrice += puddingQty * foodPrices["Pudding"];
+                orderSummary += "Pudding - Quantity: " + puddingQty + "<br>";
+            }
+
+           
+            document.getElementById('orderSummary').innerHTML = orderSummary;
+
+            
+            document.getElementById('totalAmount').textContent = totalPrice.toFixed(2);
+        }
+    </script>
+</body>
+</html>
